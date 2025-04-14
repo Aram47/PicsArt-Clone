@@ -1,4 +1,5 @@
 import { GoogleOAuthProvider, GoogleLogin, CredentialResponse } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
 
 const OAuthButton = () => {
   const clientId = '782626810761-bbn40sec9a00nuktu5c52n3mpon7emb9.apps.googleusercontent.com';
@@ -6,7 +7,10 @@ const OAuthButton = () => {
   const handleSuccess = (credentialResponse: CredentialResponse) => {
     if (credentialResponse.credential) {
       console.log("ID Token:", credentialResponse.credential);
+      const userInfo = jwtDecode(credentialResponse.credential);
+      console.log('User Info:', userInfo);
     }
+
     console.log("OAuth success:", credentialResponse);
     // Позже — отправка токена на backend
   };
