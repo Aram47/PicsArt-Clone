@@ -64,6 +64,7 @@ export class UserController {
     };
   }
 
+  @GrpcMethod('UsersService', 'GetUser')
   async getUserGrpc(data: GetUserRequest): Promise<GrpcUser> {
     const user: User = await this.__getUser(data.id);
     return {
