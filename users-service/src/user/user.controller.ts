@@ -15,6 +15,10 @@ interface GetUserRequest {
   id: number;
 }
 
+interface GetUserByEmailRequest {
+  email: string;
+}
+
 interface GrpcUser {
   username: string;
   email: string;
@@ -38,6 +42,13 @@ export class UserController {
   @Get(':id')
   getUserById(@Param('id') id: number): Promise<User> {
     return this.__getUser(id);
+  }
+
+  @ApiOperation({ summary: 'get user by email' })
+  @ApiResponse({ status: 200, type: User })
+  @Get(':email')
+  getUserByEmail(@Param('email') email: string): Promise<User> {
+    return this.__getUserByEmail(email);
   }
 
   @ApiOperation({ summary: 'create user' })
@@ -74,11 +85,25 @@ export class UserController {
     };
   }
 
+  @GrpcMethod('UsersService', 'GetUserByEmail')
+  async getUserGrpcByEmail(data: GetUserByEmailRequest): Promise<GrpcUser> {
+    const user: User = await this.__getUserByEmail(data.email);
+    return {
+      username: user.username,
+      email: user.email,
+      password: user.password,
+    };
+  }
+
   private async __createUser(dto: CreateUserDto): Promise<User> {
     return this.userService.createUser(dto);
   }
 
   private async __getUser(id: number): Promise<User> {
     return this.userService.getUserById(id);
+  }
+
+  private async __getUserByEmail(email: string): Promise<User> {
+    return this.userService.getUserByEmail(email);
   }
 }

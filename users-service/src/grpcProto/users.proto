@@ -5,6 +5,7 @@ package users;
 service UsersService {
   rpc createUserGrpc (CreateUserRequest) returns (GrpcUser);
   rpc getUserGrpc(GetUserRequest) returns (GrpcUser);
+  rpc getUserByEmailGrpc (GetUserByEmailRequest) returns (GrpcUser);
 }
 
 message CreateUserRequest {
@@ -15,6 +16,10 @@ message CreateUserRequest {
 
 message GetUserRequest {
   int32 id = 1;
+}
+
+message GetUserByEmailRequest {
+  string email = 1;
 }
 
 message GrpcUser {

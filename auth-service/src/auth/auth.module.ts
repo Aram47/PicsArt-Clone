@@ -4,6 +4,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AuthService } from './auth.service';
 import { join } from 'path';
 import { JwtModule } from '@nestjs/jwt'
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
@@ -13,16 +14,17 @@ import { JwtModule } from '@nestjs/jwt'
         transport: Transport.GRPC,
         options: {
           package: 'users',
-          protoPath: join(__dirname, '..', '/grpcProto/users.proto')
+          protoPath: join(__dirname, '..', '/grpcProto/users.proto'),
+          url: 'localhost:8000', // Users service gRPC address
         }
       }
     ]),
     JwtModule.register({
-      secret: process.env.PRIVATE_KEY, // Replace with a secure key
-      signOptions: { expiresIn: '100000000m' }, // Token expires in 1 hour
+      secret: process.env.PRIVATE_KEY || 'MQTP',
+      signOptions: { expiresIn: '100000000m' },
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}

@@ -7,7 +7,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: process.env.PRIVATE_KEY, // Must match the key above
+      secretOrKey: process.env.PRIVATE_KEY || 'MQTP', // Must match the key above
     });
   }
 
