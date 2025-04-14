@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package users;
+
+service UsersService {
+  rpc createUserGrpc (CreateUserRequest) returns (GrpcUser);
+  rpc getUserGrpc(GetUserRequest) returns (GrpcUser);
+}
+
+message CreateUserRequest {
+  string email = 1;
+  string password = 2;
+  string name = 3;
+}
+
+message GetUserRequest {
+  int32 id = 1;
+}
+
+message GrpcUser {
+  int32 id = 1;
+  string email = 2;
+  string password = 3;
+  string username = 4;
+}
+
+message Empty {}
