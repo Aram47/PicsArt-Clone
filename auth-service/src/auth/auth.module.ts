@@ -19,7 +19,7 @@ import { JwtModule } from '@nestjs/jwt'
     ]),
     JwtModule.register({
       secret: process.env.PRIVATE_KEY, // Replace with a secure key
-      signOptions: { expiresIn: '60m' }, // Token expires in 1 hour
+      signOptions: { expiresIn: '100000000m' }, // Token expires in 1 hour
     }),
   ],
   controllers: [AuthController],
