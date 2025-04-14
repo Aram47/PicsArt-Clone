@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 export interface UsersServiceClient {
   createUserGrpc(request: CreateUserRequest): Observable<GrpcUser>;
   getUserGrpc(request: GetUserRequest): Observable<GrpcUser>;
-  getUserByEmailGrpc(request: GetUserByEmailRequest): Observable<GrpcUser>;
+  getUserByUsernameGrpc(request: getUserByUsernameRequest): Observable<GrpcUser>;
 }
 
 export interface CreateUserRequest {
@@ -16,8 +16,8 @@ export interface GetUserRequest {
   id: number;
 }
 
-export interface GetUserByEmailRequest {
-  email: string;
+export interface getUserByUsernameRequest {
+  username: string;
 }
 
 export interface GrpcUser {

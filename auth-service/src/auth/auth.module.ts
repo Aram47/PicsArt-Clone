@@ -14,7 +14,7 @@ import { JwtStrategy } from './jwt.strategy';
         transport: Transport.GRPC,
         options: {
           package: 'users',
-          protoPath: join(__dirname, '..', '/grpcProto/users.proto'),
+          protoPath: join(__dirname, '../..', 'src/grpcProto/users.proto'),
           url: 'localhost:8000', // Users service gRPC address
         }
       }

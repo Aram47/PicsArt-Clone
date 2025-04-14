@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package users;
 
-service UsersService {
+service UserService {
   rpc createUserGrpc (CreateUserRequest) returns (GrpcUser);
   rpc getUserGrpc(GetUserRequest) returns (GrpcUser);
-  rpc getUserByEmailGrpc (GetUserByEmailRequest) returns (GrpcUser);
+  rpc getUserByUsernameGrpc (getUserByUsernameRequest) returns (GrpcUser);
 }
 
 message CreateUserRequest {
@@ -18,8 +18,8 @@ message GetUserRequest {
   int32 id = 1;
 }
 
-message GetUserByEmailRequest {
-  string email = 1;
+message getUserByUsernameRequest {
+  string username = 1;
 }
 
 message GrpcUser {
