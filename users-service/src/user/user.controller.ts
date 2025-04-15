@@ -6,9 +6,9 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.model';
 
 interface CreateUserRequest {
-  username: string;
   email: string;
   password: string;
+  username: string;
 }
 
 interface GetUserRequest {
@@ -65,13 +65,13 @@ export class UserController {
     return this.userService.deleteUser(id);
   }
 
-  @GrpcMethod('UsersService', 'CreateUser')
+  @GrpcMethod('UsersService', 'createUserGrpc')
   async createUserGrpc(data: CreateUserRequest): Promise<GrpcUser> {
     const user: User = await this.__createUser(data);
     return {
-      username: user.username,
       email: user.email,
       password: user.password,
+      username: user.username,
     };
   }
 
@@ -85,8 +85,10 @@ export class UserController {
     };
   }
 
-  @GrpcMethod('UsersService', 'getUserByUsername')
-  async getUserGrpcByUsername(data: getUserByUsernameRequest): Promise<GrpcUser> {
+  @GrpcMethod('UsersService', 'getUserByUsernameGrpc')
+  async getUserGrpcByUsername(
+    data: getUserByUsernameRequest,
+  ): Promise<GrpcUser> {
     const user: User = await this.__getUserByUsername(data.username);
     return {
       username: user.username,

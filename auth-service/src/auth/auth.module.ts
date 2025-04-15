@@ -3,7 +3,7 @@ import { AuthController } from './auth.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AuthService } from './auth.service';
 import { join } from 'path';
-import { JwtModule } from '@nestjs/jwt'
+import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
 
 @Module({
@@ -15,9 +15,9 @@ import { JwtStrategy } from './jwt.strategy';
         options: {
           package: 'users',
           protoPath: join(__dirname, '../..', 'src/grpcProto/users.proto'),
-          url: 'localhost:8000', // Users service gRPC address
-        }
-      }
+          url: 'localhost:4789', // Users service gRPC address
+        },
+      },
     ]),
     JwtModule.register({
       secret: process.env.PRIVATE_KEY || 'MQTP',

@@ -9,7 +9,7 @@ async function main() {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.GRPC,
     options: {
-      url: 'localhost:4789',
+      url: `${process.env.GRPC_HOST}:${process.env.GRPC_PORT}`,
       protoPath: path.join(__dirname, '..', 'src/grpcProto/users.proto'),
       package: 'users',
     },
