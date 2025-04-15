@@ -13,7 +13,7 @@ export class AuthService implements OnModuleInit {
 	constructor(@Inject('USERS_PACKAGE') private client: ClientGrpc, private jwtService: JwtService) {}
 
 	onModuleInit() {
-		this.usersService = this.client.getService<UsersServiceClient>('UserService');
+		this.usersService = this.client.getService<UsersServiceClient>('UsersService');
 	}
 
 	async login(dto: UserDto) {
