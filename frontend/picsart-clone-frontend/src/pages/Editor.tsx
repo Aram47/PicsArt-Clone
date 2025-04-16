@@ -4,6 +4,7 @@ import ImageUpload from "../components/editorComponents/ImageUpload";
 import EditorHeader from "../components/editorComponents/EditorHeader";
 import EditorControls from "../components/editorComponents/EditorControls";
 import ImagePreview from "../components/editorComponents/ImagePreview";
+import React from "react";
 
 function Editor() {
   const [image, setImage] = useState<string | null>(null);
